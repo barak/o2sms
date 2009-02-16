@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.1">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://www.mackers.com/projects/testgen4web-runner/test/forms.php]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[TestGen4Web::Runner - Test - Forms]]></value>
+        </action>
+        <action type="verify-title" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[TestGen4Web::Runner - Test - Forms]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@NAME="namedform1"]/INPUT[1]]]></xpath>
+            <value><![CDATA[test123]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@NAME="namedform1"]/INPUT[@TYPE="submit" and @VALUE=""]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[TestGen4Web::Runner - Test - Forms]]></value>
+        </action>
+        <action type="assert-text-exists" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[SUCCESS]]></value>
+        </action>
+    </actions>
+</tg4w>

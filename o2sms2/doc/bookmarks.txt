@@ -1,0 +1,2 @@
+http://groups.yahoo.com/group/libwww-perl/message/6420
+http://rt.cpan.org/NoAuth/Bug.html?id=1894

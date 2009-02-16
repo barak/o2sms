@@ -1,0 +1,32 @@
+  -P <proxy>   use this http(s) proxy
+
+don't complain if user is missing default config file.
+
+  
+http/https proxy bug with o2sms
+move to Term:readline to fix stdin bug on matrix
+
+handle funny characters - not even supported by webform
+proxy CONNECT support
+vodafone multiple texts using multiple form
+manage changing usernames / reusing cookies better
+detect SSL not installed
+logging
+shorter timeout
+allow easier sending to land line
+pretend to be proxy better
+
+
+me: $NAME replacements in messages
+dude2: use nokia's message joiner character
+cliph: use vodafone's multiple send feature.
+
+
+Use of uninitialized value in concatenation (.) or string at vodasms.pl
+line 186
+.
+Use of uninitialized value in concatenation (.) or string at vodasms.pl
+line 187
+.
+Use of uninitialized value in concatenation (.) or string at vodasms.pl
+line 188

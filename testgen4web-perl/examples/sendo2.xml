@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.1">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://web.o2.ie/]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 Mobile phone network, Ireland - Phones, Ringtones and more]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="2">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 Mobile phone network, Ireland - Phones, Ringtones and more]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="3">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[o2.ie]]></value>
+        </action>
+        <action type="verify-title" step="4">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 Ireland - O2 Mobile phone, Ringtones and free text messages]]></value>
+        </action>
+        <action type="click" refresh="true" step="5">
+            <xpath><![CDATA[*/A[@CDATA="nullWeb text"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+        <action type="verify-title" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+        <action type="fill" frame="grouptext" step="8">
+            <xpath><![CDATA[*/FORM[@NAME="sendForm"]/*/TEXTAREA[@NAME="Msg"]]]></xpath>
+            <value><![CDATA[%%WEBTEXTBODY%%]]></value>
+        </action>
+        <action type="fill" frame="grouptext" step="9">
+            <xpath><![CDATA[*/FORM[@NAME="sendForm"]/*/INPUT[@TYPE="text" and @NAME="msisdn"]]]></xpath>
+            <value><![CDATA[353863608308]]></value>
+        </action>
+        <action type="click" refresh="true" frame="grouptext" step="10">
+            <xpath><![CDATA[*/FORM[@NAME="sendForm"]/*/INPUT[@NAME="Send" and @VALUE="Send"]]]></xpath>
+            <value><![CDATA[Send]]></value>
+        </action>
+        <action type="verify-title" step="11">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+    </actions>
+</tg4w>

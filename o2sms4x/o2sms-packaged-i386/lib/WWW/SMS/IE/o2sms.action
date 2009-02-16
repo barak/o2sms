@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.1">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[https://www.o2online.ie/amserver/UI/Login?org=o2ext]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Login]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[@NAME="dashboard-login-form"]/*/INPUT[@ID="IDToken1"]]]></xpath>
+            <value><![CDATA[{username}]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[@NAME="dashboard-login-form"]/*/INPUT[@ID="IDToken2"]]]></xpath>
+            <value><![CDATA[{password}]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[@NAME="dashboard-login-form"]/*/INPUT[@NAME="Go" and @VALUE="Go"]]]></xpath>
+            <value><![CDATA[Go]]></value>
+        </action>
+        <action type="verify-title" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - My O2 - My O2 home]]></value>
+        </action>
+        <action type="assert-text-exists" refresh="true" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Thank you for logging in to O2.ie]]></value>
+        </action>
+        <action type="goto" refresh="true" step="7">
+            <xpath><![CDATA[window.location.href]]]></xpath>
+            <value><![CDATA[http://messaging.o2online.ie/ssomanager.osp?APIID=AUTH-WEBSSO]]></value>
+        </action>
+        <action type="goto" frame="frame_content" refresh="true" step="8">
+            <xpath><![CDATA[infocenter.osp]]></xpath>
+            <value><![CDATA[o2om_smscenter_new.osp]]></value>
+        </action>
+        <action type="fill" step="9">
+            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/*/TEXTAREA[@NAME="SMSText"]]]></xpath>
+            <value><![CDATA[{message}]]></value>
+        </action>
+        <action type="fill" step="10">
+            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/*/INPUT[@NAME="SMSTo"]]]></xpath>
+            <value><![CDATA[{recipient}]]></value>
+        </action>
+        <action type="click" refresh="true" step="11">
+            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/]]></xpath>
+            <value><![CDATA[http://messaging.o2online.ie/smscenter_send.osp]]></value>
+        </action>
+	<action type="assert-text-exists" step="12">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Your Webtext has been successfully submitted.]]></value>
+        </action>
+        <action type="goto" refresh="true" step="13">
+            <xpath><![CDATA[window.location.href]]]></xpath>
+            <value><![CDATA[http://messaging.o2online.ie/ssomanager.osp?APIID=AUTH-WEBSSO]]></value>
+        </action>
+        <action type="goto" frame="frame_content" refresh="true" step="14">
+            <xpath><![CDATA[infocenter.osp]]></xpath>
+            <value><![CDATA[o2om_smscenter_new.osp]]></value>
+        </action>
+	<action type="assert-text-exists" step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Number of free text messages remaining this month: <strong>(\d+)]]></value>
+        </action>
+    </actions>
+</tg4w>

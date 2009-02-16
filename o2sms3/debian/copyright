@@ -1,0 +1,25 @@
+This is the debian package for the o2sms module.
+It was created by David McNamara <me@mackers.com> using dh-make-perl.
+
+This copyright info was automatically extracted from the perl module.
+It may not be accurate, so you better check the module sources
+if don't want to get into legal troubles.
+
+The upstream author is: 
+
+David McNamara (me.at.mackers.dot.com).
+
+
+Copyright 2000-2006 David McNamara
+
+This program is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
+
+Perl is distributed under your choice of the GNU General Public License or
+the Artistic License.  On Debian GNU/Linux systems, the complete text of the
+GNU General Public License can be found in `/usr/share/common-licenses/GPL'
+and the Artistic Licence in `/usr/share/common-licenses/Artistic'.
+
+The author accepts no responsibility nor liability for your use of this
+software.  Please read the terms and conditions of the website of your mobile
+provider before using the program.

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>o2sms</title>
+<style type="text/css">
+    @import "o2sms.css";
+</style>
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleButton.js' charset='utf-8'></script>
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleScrollArea.js' charset='utf-8'></script>
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleScrollbar.js' charset='utf-8'></script>
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleInfoButton.js' charset='utf-8'></script>
+<script type='text/javascript' src='/System/Library/WidgetResources/AppleClasses/AppleAnimator.js' charset='utf-8'></script>
+<script type='text/javascript' src='o2sms.js' charset='utf-8'></script>
+</head>
+
+<body>
+
+<div id="front">
+    <div id="infoButton"></div>
+
+    <h1 id="header">&nbsp;</h1>
+
+    <div id="messagePanel" class="container">
+        <div id="charsUsed" class="statusPanel">&html;</div>
+        <textarea id="message" class="contentPanel">&nbsp;</textarea>
+    </div>
+
+    <div id="numberPanel" class="container">
+        <input id="numberSearch" class="statusPanel"></input>
+        <div id="numberSearchGhost" class="statusPanel">abc</div>
+        <div id="numberScrollArea" class="contentPanel"></div>
+        <div id="numberScrollbar"></div>
+    </div>
+
+    <div id="infoPanel" class="container">
+        <div id="errorScrollArea" class="contentPanel">&nbsp;</div>
+        <div id="errorScrollbar"></div>
+    </div>
+
+    <div id="cancel">c</div>
+    <div id="ok"></div>
+</div>
+
+<div id="back">
+    <h1 id="prefheader">Preferences</h1>
+
+    <form class="container">
+        <span>Login</span> <input type="text" name="username" id="username"/><br/>
+        <span>Pass</span> <input type="password" name="password" id="password"/><br/>
+        <span>Provider</span> <select name="provider" id="provider"><option value="o2">o2</option><option value="vodafone">voda</option><option value="meteor">met</option><option name="aft">aft</option></select>
+    </form>
+
+    <div id="done"></div>
+</div>
+
+</body>
+</html>

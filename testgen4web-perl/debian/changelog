@@ -1,0 +1,78 @@
+libtestgen4web-runner-perl (0.11-1) unstable; urgency=low
+
+  * Added 'var' action support.
+  * Added explicit AJAX support.
+  * Added magic form support.
+
+ -- David McNamara <me@mackers.com>  Thu, 27 Nov 2008 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.10-1) unstable; urgency=low
+
+  * Fixed "goto_frame" bug in previous release.
+
+ -- David McNamara <me@mackers.com>  Thu, 20 Nov 2008 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.09-1) unstable; urgency=low
+
+  * Fixed _log_warn warning.
+  * Added support for frame "goto".
+  * Added support for frame "goto" with substitute.
+  * Added support for form action override.
+  * Fixed a _log_warn warning.
+
+
+ -- David McNamara <me@mackers.com>  Wed, 19 Nov 2008 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.08-1) unstable; urgency=low
+
+  * Fixed bug when using numbered input fields in xpaths.
+
+ -- David McNamara <me@mackers.com>  Tue, 18 Jul 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.07-1) unstable; urgency=low
+
+  * Ignoring HTML comments during xpath parse.
+  * Disabled LWP::UserAgent automatic redirects.
+
+ -- David McNamara <me@mackers.com>  Tue, 25 May 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.06-1) unstable; urgency=low
+
+  * Replaced switch statment with ifs
+
+ -- David McNamara <me@mackers.com>  Tue, 23 May 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.05-1) unstable; urgency=low
+
+  * Adding x and y to submits
+  * Support for @HREF attrib in a tag clicks.
+
+ -- David McNamara <me@mackers.com>  Tue,  2 May 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.04-1) unstable; urgency=low
+
+  * Support for named forms and numbered inputs in xpaths.
+  * New cookie_jar() accessor. Renamed cookie_jar_file() accessor.
+  * Supporting refreshes on form submits.
+  * Bug fix: failing if missing 'method' on form.
+
+ -- David McNamara <me@mackers.com>  Wed,  20 Mar 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.03-1) unstable; urgency=low
+
+  * Added requirement for Switch 2.10
+
+ -- David McNamara <me@mackers.com>  Wed,  9 Mar 2006 12:00:00 +0000
+
+libtestgen4web-runner-perl (0.02-1) unstable; urgency=low
+
+  * Small bug fixes
+
+ -- David McNamara <me@mackers.com>  Wed,  2 Mar 2006 17:58:09 +0000
+
+libtestgen4web-runner-perl (0.01-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- David McNamara <me@mackers.com>  Wed,  1 Mar 2006 17:58:09 +0000
+

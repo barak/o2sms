@@ -1,0 +1,169 @@
+body
+{
+    background: url(Default.png) no-repeat;
+    font-family: "Lucida Grande";
+}
+
+h1
+{
+    position: absolute;
+    top: 75px;
+    left: 52px;
+    width: 112px;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+
+h2
+{
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+}
+
+.container
+{
+    position: absolute;
+    left: 52px;
+    width: 112px;
+    height: 70px;
+    font-size: 10px;
+    top: 102px;
+    background-color: transparent;
+}
+
+#cancel
+{
+    position: absolute;
+    top: 192px;
+    left: 40px;
+    width: 36px;
+    text-align: right;
+    padding-right: 4px;
+    font-size: 12px;
+    color: gray;
+}
+
+#ok,
+#done
+{
+    position: absolute;
+    top: 215px;
+    left: 91px;
+    font-size: 12px;
+}
+
+#numberPanel,
+#infoPanel
+{
+    display: none;
+}
+
+.contentPanel
+{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 20px;
+}
+
+#message
+{
+    width: 112px;
+    height: 70px;
+}
+
+#numberScrollbar,
+#errorScrollbar
+{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 10px;
+}
+
+.entry,
+.entry_selected,
+.free_entry
+{
+    margin-bottom: 3px;
+}
+
+.free_entry
+{
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid black;
+}
+
+.entry_selected
+{
+    background: #AAAAFF;
+}
+
+#front
+{
+    display: block;
+    height: 307px;
+    width: 214px;
+}
+
+#back
+{
+    display: none;
+}
+
+#infoButton
+{
+    position: absolute;
+    top: 27px;
+    left: 165px;
+}
+
+textarea, input
+{
+    background-color: transparent;
+}
+
+input
+{
+    width: 80px;
+}
+
+#back .container span
+{
+    font-weight: bold;
+}
+
+.statusPanel
+{
+    position: absolute;
+    top: -22px;
+    right: 0px;
+    width: 30px;
+    font-size: 10px;
+    text-align: right;
+}
+
+#numberSearch
+{
+    width: 30px;
+}
+
+#numberSearchGhost
+{
+    color: #AAAAAA;
+    padding: 0.3em 0.2em;
+}
+
+div.statusPanel
+{
+    padding: 0.4em 0.2em;
+}
+
+#charsUsed
+{
+    color: #666666;
+}

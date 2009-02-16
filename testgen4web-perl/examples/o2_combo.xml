@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.38.1">
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[http://web.o2.ie/]]></value>
+        </action>
+        <action type="verify-title" step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 Mobile phone network, Ireland - Phones, Ringtones and more]]></value>
+        </action>
+        <action type="fill" step="2">
+            <xpath><![CDATA[*/FORM[3]/*/INPUT[@ID="username"]]]></xpath>
+            <value><![CDATA[{username}]]></value>
+        </action>
+        <action type="fill" step="3">
+            <xpath><![CDATA[*/FORM[3]/*/INPUT[@ID="password"]]]></xpath>
+            <value><![CDATA[{password}]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[3]/*/INPUT[@NAME="imageField" and @VALUE=""]]]></xpath>
+            <value><![CDATA[imageField]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[o2.ie]]></value>
+        </action>
+        <action type="verify-title" step="6">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 Ireland - O2 Mobile phone, Ringtones and free text messages]]></value>
+        </action>
+        <action type="assert-text-exists" step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You are here: Personal Home]]></value>
+        </action>
+        <action type="click" refresh="true" step="8">
+            <xpath><![CDATA[*/A[@CDATA="nullWeb text"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" refresh="true" step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+        <action type="verify-title" step="10">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+        <action type="fill" frame="grouptext" step="11">
+            <xpath><![CDATA[*/FORM[1]/*/TEXTAREA[@NAME="Msg"]]]></xpath>
+            <value><![CDATA[{message}]]></value>
+        </action>
+        <action type="fill" frame="grouptext" step="12">
+            <xpath><![CDATA[*/FORM[1]/*/INPUT[@TYPE="text" and @NAME="msisdn"]]]></xpath>
+            <value><![CDATA[{recipient}]]></value>
+        </action>
+        <action type="fill" frame="grouptext" step="13">
+            <xpath><![CDATA[*/FORM[1]/*/INPUT[@NAME="command"]]]></xpath>
+            <value><![CDATA[send]]></value>
+        </action>
+        <action type="click" refresh="true" frame="grouptext" step="14">
+            <xpath><![CDATA[*/FORM[1]/*/INPUT[@NAME="Send" and @VALUE="Send"]]]></xpath>
+            <value><![CDATA[Send]]></value>
+        </action>
+        <action type="verify-title" step="15" refresh="true">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[O2 - Personal - My O2 - Web Text - 250 free every month]]></value>
+        </action>
+        <action type="assert-text-exists" step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[You now have (\d+) Free Messages remaining this month]]></value>
+        </action>
+    </actions>
+</tg4w>

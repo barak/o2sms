@@ -1,0 +1,16 @@
+Source: o2sms
+Section: perl
+Priority: optional
+Build-Depends: debhelper (>= 4.0.2)
+Build-Depends-Indep: perl (>= 5.8.0-7)
+Maintainer: David McNamara <me@mackers.com>
+Standards-Version: 3.6.1
+
+Package: o2sms
+Architecture: all
+Depends: ${perl:Depends}, ${misc:Depends}, libnet-ssleay-perl, libio-socket-ssl-perl, libcrypt-ssleay-perl, libtestgen4web-runner-perl (>= 0.11-1)
+Description:  A module to send SMS messages using .ie websites
+ WWW::SMS::IE::iesms is a module to send SMS messages via the command line
+ using the websites of Irish mobile operators. This is done by simulating a web
+ browser's interaction with those websites. This module requires a valid web
+ account with O2 Ireland, Vodafone Ireland or Meteor Ireland.

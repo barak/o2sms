@@ -1,0 +1,38 @@
+# o2sms(1) completion
+# Mostly ripped from moosic completion.
+# Just put in /etc/bash_completion.d and restart bash
+# You need http://freshmeat.net/projects/bashcompletion/
+# Alter for vodasms, meteorsms
+# 
+# Copyright 2003 "Etienne PIERRE" <etienne@tuxfamily.org>
+# Copyright 2004 "Daniel Pearson" <daniel@nanoo.org>
+# Copyright 2005 "Ivan Kelly" <ivan@ivankelly.net>
+# Copyright 2006 "David McNamara" <http://www.mackers.com/>
+#
+have o2sms &&
+_o2sms()
+{
+	local cur options paroptions
+
+	COMPREPLY=()
+	cur=${COMP_WORDS[COMP_CWORD]}
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+	
+        options='-u -p -c -s -r -t9 -P -z -d -h -v'
+	options='--username -u --password -p --message -m --sig -s --config-file -c \
+		--data-dir --http-proxy -P --https-proxy --carrier --split-messages -s \
+		--reuse-cookies -r --hard-split -k --emulate-t9 -t9 --squeeze-text -z \
+		--history -h --version --help -h --debug'
+
+        names=`cat .o2sms/config | awk '/^alias/ { print $2 }'`
+	paroptions="$options $names"
+	
+        COMPREPLY=($( compgen -W "$paroptions" | grep ^$cur ))
+
+	return 0
+
+}
+[ "$have" ] && complete -F _o2sms -o default o2sms
+
+
+

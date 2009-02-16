@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tg4w version="0.50.1.1">
+    <datasets>
+    </datasets>
+    <actions>
+        <action type="goto" refresh="true" step="0">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[https://vodafone.ie/]]></value>
+        </action>
+        <action type="verify-title" window="." step="1">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Vodafone Ireland]]></value>
+        </action>
+        <action type="fill" window="." step="2">
+            <xpath><![CDATA[*/FORM[2]/*/INPUT[@TYPE="text" and @NAME="username"]]]></xpath>
+            <value><![CDATA[{username}]]></value>
+        </action>
+        <action type="fill" window="." step="3">
+            <xpath><![CDATA[*/FORM[2]/*/INPUT[@TYPE="password" and @NAME="password"]]]></xpath>
+            <value><![CDATA[{password}]]></value>
+        </action>
+        <action type="click" refresh="true" step="4">
+            <xpath><![CDATA[*/FORM[2]/*/INPUT[@TYPE="image" and @VALUE=""]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="verify-title" window="." step="5">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[My Vodafone, Webtext, Email, Upgrades, Business Email, Mobile Phone Offers at Vodafone.ie - Vodafone Ireland]]></value>
+        </action>
+        <action type="goto" refresh="true" step="6">
+            <xpath><![CDATA[window.location.href]]></xpath>
+            <value><![CDATA[https://www.vodafone.ie/myv/index.jsp]]></value>
+        </action>
+        <action type="assert-text-exists" window="." step="7">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Welcome]]></value>
+        </action>
+        <action type="click" refresh="." window="." step="8">
+            <xpath><![CDATA[*/A[@CDATA="Webtext"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" window="." step="9">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Webtext - Vodafone Ireland]]></value>
+        </action>
+        <action type="fill" window="." step="10">
+            <xpath><![CDATA[*/FORM[2]/*/TEXTAREA[1]]]></xpath>
+            <value><![CDATA[{message}]]></value>
+        </action>
+        <action type="fill" step="11">
+            <xpath><![CDATA[*/FORM[2]/*/INPUT[2]]]></xpath>
+			<value><![CDATA[{recipient}]]></value>
+        </action>
+        <action type="wait" step="12">
+                <value><![CDATA[{delay}]]></value>
+        </action>
+        <action type="click" refresh="." window="." step="13">
+            <xpath><![CDATA[*/FORM[2]/*/INPUT[@TYPE="image" and @VALUE=""]]]></xpath>
+            <value><![CDATA[null]]></value>
+        </action>
+        <action type="click" refresh="." window="." step="14">
+            <xpath><![CDATA[*/A[@HREF="/myv/messaging/webtext/Setup.shtml"]]]></xpath>
+            <value><![CDATA[]]></value>
+        </action>
+        <action type="verify-title" window="." step="15">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Webtext - Vodafone Ireland]]></value>
+        </action>
+        <action type="assert-text-exists" window="." step="16">
+            <xpath><![CDATA[*]]></xpath>
+            <value><![CDATA[Remaining messages this month <strong>(\d+)]]></value>
+        </action>
+    </actions>
+</tg4w>
