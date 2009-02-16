@@ -23,8 +23,12 @@ update-from-o2sms:
 	cp /tmp/tgwp-repo/main/lib/TestGen4Web/Runner.pm o2sms-packaged-ppc/lib/TestGen4Web/Runner.pm
 	rm -rf /tmp/tgwp-repo
 
-publish:
-	scp o2sms-ppc.wdgt.zip boris:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
-	scp o2sms-ppc.wdgt.zip mackers.com:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
-	scp o2sms-i386.wdgt.zip boris:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
-	scp o2sms-i386.wdgt.zip mackers.com:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
+#publish:
+#	scp o2sms-ppc.wdgt.zip boris:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
+#	scp o2sms-ppc.wdgt.zip mackers.com:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
+#	scp o2sms-i386.wdgt.zip boris:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
+#	scp o2sms-i386.wdgt.zip mackers.com:/var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
+
+publish-sf: 
+	/usr/bin/scp o2sms-ppc.wdgt.zip o2sms-i386.wdgt.zip mackers@frs.sourceforge.net:uploads/
+

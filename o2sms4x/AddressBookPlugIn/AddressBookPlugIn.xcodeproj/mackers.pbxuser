@@ -5,7 +5,6 @@
 		activeTarget = 8D5B49AC048680CD000E48DA /* AddressBookPlugIn */;
 		breakpoints = (
 		);
-		breakpointsGroup = E70754860BD13F2700F596F1 /* XCBreakpointsBucket */;
 		codeSenseManager = E7FD976C0BD1392E003918D5 /* Code sense */;
 		perUserDictionary = {
 			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
@@ -168,8 +167,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 200620564;
-			PBXWorkspaceStateSaveDate = 200620564;
+			PBXPerProjectTemplateStateSaveDate = 256486559;
+			PBXWorkspaceStateSaveDate = 256486559;
 		};
 		sourceControlManager = E7FD976B0BD1392E003918D5 /* Source Control */;
 		userBuildSettings = {
@@ -217,12 +216,6 @@
 			sepNavVisRect = "{{0, 0}, {993, 710}}";
 			sepNavWindowFrame = "{{15, 34}, {1032, 839}}";
 		};
-	};
-	E70754860BD13F2700F596F1 /* XCBreakpointsBucket */ = {
-		isa = XCBreakpointsBucket;
-		name = "Project Breakpoints";
-		objects = (
-		);
 	};
 	E7FD976B0BD1392E003918D5 /* Source Control */ = {
 		isa = PBXSourceControlManager;

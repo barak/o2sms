@@ -29,6 +29,9 @@ publish-cpan: dist
 	echo "(Use furniture password or enter a world of pain!!)"
 	/usr/local/bin/cpan-upload -user mackers -mailto me@mackers.com -verbose `ls -1t *.tar.gz | head -1`
 
+publish-sf: dist
+	/usr/bin/scp `ls -1t *.tar.gz | head -1` mackers@frs.sourceforge.net:uploads/
+
 debuild: META.yml dist
 	mkdir /tmp/debuild-o2sms/
 	cp `ls -1t *.tar.gz | head -1` /tmp/debuild-o2sms/
