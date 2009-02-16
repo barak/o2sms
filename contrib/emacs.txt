@@ -1,0 +1,55 @@
+A really quick integration for The Insidious Big Brother Database 
+(http://bbdb.sourceforge.net/) in emacs:
+
+(setq sms-provider "vodasms")
+
+(define-key bbdb-mode-map "v" 'bbdb-vodasms)
+(defun bbdb-vodasms (message)
+  "Run vodasms for the given number"
+  (interactive "sMessage: ")
+   (let ((phone (aref (car (cdr (bbdb-current-field))) 1))
+         (oldbuffer (current-buffer))
+         )
+     (make-comint "sms" sms-provider nil "-m" message phone)
+     (switch-to-buffer-other-window "*sms*")
+     (switch-to-buffer-other-window oldbuffer)
+     ))
+
+
+You install bbdb and put that in your dot emacs file. Then when you
+pull up a new contact put the cursor over their mobile number and
+press 'v'.
+
+--
+
+Another couple of functions just for general emacs use ( not just for use with
+bbdb )
+
+So to use, in emacs just type M-x sms and it will prompt you for a
+number|alias then a message, or alternatively select a block of text
+and type M-x sms-region which will prompt you for a number then use
+the selected text block as the message body.
+
+(setq sms-provider "vodasms")
+
+(defun sms (phone message)
+  "Send an sms to a number using provider set defined in sms-provider"
+  (interactive "sPhone|Alias|Group: \nsMessage: ")
+   (let ((oldbuffer (current-buffer)))
+     (make-comint "sms" sms-provider nil "-m" message phone)
+     (switch-to-buffer-other-window "*sms*")
+     (switch-to-buffer-other-window oldbuffer)
+     ))
+
+(defun sms-region (phone)
+  "Send the contents of a region to a number"
+  (interactive "sPhone|Alias|Group:")
+   (let ((oldbuffer (current-buffer))
+         (message (buffer-substring (point) (mark)))
+         )
+     (make-comint "sms" sms-provider nil "-m" message phone)
+     (switch-to-buffer-other-window "*sms*")
+     (switch-to-buffer-other-window oldbuffer)
+     ))
+
+

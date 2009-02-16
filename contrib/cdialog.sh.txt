@@ -1,0 +1,305 @@
+#!/bin/sh
+touch ~/.o2smsrc
+
+sEnd () {
+cdialog --title "Send SMS" --backtitle "Netsoc -> O2 -> SMS" --checklist "Select recipients. Press space to select. Multiple recipients count for multiple messages sent" 25 45 16 \
+"New-Number" "" "off" `cat ~/.o2smsrc | grep alias | sed -e 's/alias \(.*\) \(.*\)/\1 \2 off/'` 2>/tmp/recipients.$$
+sel=$?
+case $sel in
+ 1) return
+esac
+
+recp=`cat /tmp/recipients.$$ | tr -d \" | sed -e 's/New-Number //'`
+grep New-Number < /tmp/recipients.$$
+new=$?
+rm /tmp/recipients.$$
+
+if [ $new -eq 0 ]
+ then
+  cdialog --title "New Number" --backtitle "Netsoc -> O2 -> SMS" --inputbox "Enter number not stored in phonebook" 9 38 086 2>/tmp/name.$$
+  sel=$?
+  numb=`cat /tmp/name.$$`
+  rm  /tmp/name.$$
+
+  case $sel in
+   1) return; 
+  esac
+fi
+
+cdialog --title "Compose message" --backtitle "Netsoc -> O2 -> SMS" --msgbox "You will now be presented with a text editor to input your message" 9 38
+nano /tmp/msg.$$
+cat /tmp/msg.$$ | o2sms.pl $numb $recp
+sleep 2
+return
+
+	
+}
+pHonebook () {
+cdialog --title "Phonebook" --backtitle "Netsoc -> O2 -> SMS" --menu "Manage your phonebook" 9 38 3 "Add" "" "Edit" "" "Delete" "" 2>/tmp/menuitem.$$
+
+sel=$?
+case $sel in
+  1) return                   
+esac
+
+
+pdecision=`cat /tmp/menuitem.$$`
+rm  /tmp/menuitem.$$
+
+case $pdecision in
+Edit) pHoneEdit;;
+Add) pHoneAdd;;
+Delete) pHoneDel;;
+esac
+
+
+}
+
+pHoneAdd () {
+
+cdialog --title "Add entry" --backtitle "Netsoc -> O2 -> SMS" --inputbox "Please enter the name of the contact:" 9 38 2>/tmp/name.$$ 
+sel=$?
+name=`cat /tmp/name.$$`
+rm  /tmp/name.$$
+
+case $sel in
+  1) return;
+esac
+
+
+cdialog --title "Add entry" --backtitle "Netsoc -> O2 -> SMS" --inputbox "Please enter the phonenumber of the contact:" 9 38 086 2>/tmp/number.$$
+sel=$?
+number=`cat /tmp/number.$$`
+rm  /tmp/number.$$
+
+case $sel in
+  1) return;
+esac
+
+
+echo "alias $name $number" >> ~/.o2smsrc
+
+cdialog --title "Entry added" --backtitle "Netsoc -> O2 -> SMS" --msgbox "Added: $name $number" 9 38 
+
+return
+
+}
+
+pHoneEdit () {
+
+grep alias < ~/.o2smsrc > /dev/null
+exi=$?
+
+if [ $exi -eq 0 ]
+then
+ cdialog --title "Edit Phonebook" --backtitle "Netsoc -> O2 -> SMS" --inputmenu "Edit Stored phone numbers" 25 45 16 \
+ `cat ~/.o2smsrc | grep alias | sed -e 's/alias \(.*\) \(.*\)/\1 \2/'` 2>/tmp/edit.$$
+ sel=$?
+ case $sel in
+   1) return;
+ esac
+ cat /tmp/edit.$$ | grep -v RENAMED > /dev/null
+ okButt=$?
+ case $okButt in
+   0) return;
+ esac
+
+ rname=`cat /tmp/edit.$$ | sed -e 's/.*RENAMED \(.*\) \(.*\)$/\1/'`
+ rnumb=`cat /tmp/edit.$$ | sed -e 's/.*RENAMED \(.*\) \(.*\)$/\2/'`
+ cat ~/.o2smsrc | sed -e 's/alias '$rname'.*/alias '$rname' '$rnumb'/' 
+ mv ~/.o2smsrc-tmp ~/.o2smsrc
+ rm /tmp/edit.$$
+else 
+ cdialog --title "No phone numbers" --backtitle "Netsoc -> O2 -> SMS" --msgbox "You do not have any phone numbers stored in your phonebook to edit" 9 38
+ return
+fi
+}
+
+pHoneDel () {
+cdialog --title "Delete Contact" --backtitle "Netsoc -> O2 -> SMS" --checklist "Select contact to delete" 25 45 16 \
+`cat ~/.o2smsrc | grep alias | sed -e 's/alias \(.*\) \(.*\)/\1 \2 off/'` 2>/tmp/dcont.$$
+sel=$?
+case $sel in
+ 1) return
+esac
+
+cat /tmp/dcont.$$ | tr -d \" | tr [:space:] \| | sed -e 's/\(.*\)|/egrep -v "\1" < ~\/.o2smsrc/' | sh > ~/.o2smsrc-tmp
+mv ~/.o2smsrc-tmp ~/.o2smsrc
+rm /tmp/dcont.$$
+
+return
+}
+
+sEtLogin () {
+
+egrep "username|password" < ~/.o2smsrc > /dev/null
+exi=$?
+
+if [ $exi -eq 0 ]
+then
+ cdialog --title "Edit Login" --backtitle "Netsoc -> O2 -> SMS" --inputmenu "Edit login info for o2.ie" 13 45 6 \
+ `cat ~/.o2smsrc | egrep "username|password"` 2>/tmp/login.$$
+ sel=$?
+ case $sel in
+  1) return;
+ esac
+ cat /tmp/login.$$ | grep -v RENAMED > /dev/null
+ okButt=$?
+ case $okButt in
+  0) echo return;
+ esac
+ rarg=`cat /tmp/login.$$ | sed -e 's/.*RENAMED \(.*\) \(.*\)$/\1/'`
+ rvar=`cat /tmp/login.$$ | sed -e 's/.*RENAMED \(.*\) \(.*\)$/\2/'`
+ cat ~/.o2smsrc | sed -e 's/'$rarg'.*/'$rarg' '$rvar'/' > ~/.o2smsrc-tmp
+ mv ~/.o2smsrc-tmp ~/.o2smsrc
+ rm /tmp/login.$$
+ return
+
+else
+ cdialog --title "Enter username" --backtitle "Netsoc -> O2 -> SMS" --inputbox "Please enter your o2.ie username:" 9 38 2>/tmp/name.$$
+ sel=$?
+ name=`cat /tmp/name.$$`
+ rm  /tmp/name.$$
+ case $sel in
+   1) return;
+ esac
+
+ cdialog --title "Enter Password" --backtitle "Netsoc -> O2 -> SMS" --inputbox "Please enter your o2.ie password:" 9 38 2>/tmp/pass.$$
+ sel=$?
+ pass=`cat /tmp/pass.$$`
+ rm  /tmp/pass.$$
+ case $sel in
+  1) return;
+ esac
+ 
+ echo "username $name" >> ~/.o2smsrc
+ echo "password $pass" >> ~/.o2smsrc
+ return
+fi
+return
+
+}
+
+
+sEtProgram () {
+cdialog --title "Program Options" --backtitle "Netsoc -> O2 -> SMS" --checklist "Select program options" 11 85 4 \
+noreuse "Don't Reuse cookies when logging in" "`grep noreuse < ~/.o2smsrc | sed -e 's/noreuse/on/'`" \
+nosplit "Don't split message over multiple SMSs" "`grep nosplit < ~/.o2smsrc | sed -e 's/nosplit/on/'`" \
+nofill "Don't fill the end of the message with spaces (to clear ad)" "`grep nofill < ~/.o2smsrc | sed -e 's/nofill/on/'`" \
+capitalise "Capitalise first letter in every sentence" "`grep capitalise < ~/.o2smsrc | sed -e 's/capitalise/on/'`" 2>/tmp/setopt.$$
+sel=$?
+case $sel in
+  1) return;
+esac
+
+
+grep noreuse < /tmp/setopt.$$ > /dev/null
+ed=$?
+if [ $ed -eq 1 ]
+ then
+  grep -v noreuse < ~/.o2smsrc > ~/.o2smsrc-tmp
+  mv ~/.o2smsrc-tmp ~/.o2smsrc
+ else
+  grep noreuse < ~/.o2smsrc > /dev/null
+  if [ $? -eq 1 ]
+   then 
+    echo noreuse >> ~/.o2smsrc
+  fi
+fi
+
+grep nosplit < /tmp/setopt.$$ > /dev/null
+ed=$?
+if [ $ed -eq 1 ]
+ then
+  grep -v nosplit < ~/.o2smsrc > ~/.o2smsrc-tmp
+  mv ~/.o2smsrc-tmp ~/.o2smsrc
+ else
+  grep nosplit < ~/.o2smsrc > /dev/null
+  if [ $? -eq 1 ]
+   then
+    echo nosplit >> ~/.o2smsrc
+  fi
+fi
+
+grep nofill < /tmp/setopt.$$ > /dev/null
+ed=$?
+if [ $ed -eq 1 ]
+ then
+  grep -v nofill < ~/.o2smsrc > ~/.o2smsrc-tmp
+  mv ~/.o2smsrc-tmp ~/.o2smsrc
+ else
+  grep nofill < ~/.o2smsrc > /dev/null
+  if [ $? -eq 1 ]
+   then
+    echo nofill >> ~/.o2smsrc
+  fi
+fi
+
+grep capitalise < /tmp/setopt.$$ > /dev/null
+ed=$?
+if [ $ed -eq 1 ]
+ then
+  grep -v capitalise < ~/.o2smsrc > ~/.o2smsrc-tmp
+  mv ~/.o2smsrc-tmp ~/.o2smsrc
+ else
+  grep capitalise < ~/.o2smsrc > /dev/null
+  if [ $? -eq 1 ]
+   then
+    echo capitalise >> ~/.o2smsrc
+  fi
+fi
+ 
+rm /tmp/setopt.$$
+
+return
+}
+
+
+sEttings () {
+
+cdialog --title "Settings" --backtitle "Netsoc -> O2 -> SMS" --menu "Program / Account settings" 10 38 2 \
+"Login" "settings" "Program" "options" 2>/tmp/set.$$
+sel=$?
+case $sel in
+  1) return;
+esac
+
+sett=`cat /tmp/set.$$`
+rm  /tmp/set.$$
+
+
+case $sett in
+Login) sEtLogin;;
+Program) sEtProgram;;
+esac
+
+}
+
+hIstory () {
+cdialog --title "SMS History" --backtitle "Netsoc -> O2 -> SMS" --textbox ~/.o2smsmsg 30 100
+
+}
+
+mAin () {
+cdialog --title "SMS" --backtitle "Netsoc -> O2 -> SMS" --nocancel --menu "This program sends text messages via o2.ie's website" 13 38 5 \
+"Send" "" "Phonebook" "" "History" "" "Settings" "" "Quit" "" 2>/tmp/menuitem.$$
+
+decision=`cat /tmp/menuitem.$$`
+rm  /tmp/menuitem.$$
+
+
+case $decision in
+Send) sEnd;;
+Phonebook) pHonebook;;
+Settings) sEttings;;
+History) hIstory;;
+Quit) i=2; exit;
+esac
+
+}
+i=1
+while [ $i -eq 1 ]
+do  
+mAin
+done
+
