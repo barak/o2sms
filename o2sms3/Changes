@@ -1,8 +1,9 @@
 Revision history for Perl module WWW::SMS::IE::iesms
 
-3.33		2008-??-??
+3.33		2008-05-07
 
 	Added SMS::Send drivers.
+    Fixed o2 support
 
 3.32		2008-11-27
 
