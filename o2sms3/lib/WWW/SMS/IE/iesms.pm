@@ -64,6 +64,7 @@ use Data::Dumper;
 use constant LOGIN_LIFETIME => 60 * 30;
 use constant TG4W_VERIFY_TITLES => 0;
 use constant TG4W_QUIET => 0;
+$Storable::forgive_me = 1; 
 
 my %iesms_user_agent_strings = (
 	"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" => 1.0,
