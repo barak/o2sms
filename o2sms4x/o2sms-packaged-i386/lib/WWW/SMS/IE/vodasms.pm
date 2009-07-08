@@ -1,5 +1,5 @@
 #
-# $Id: vodasms.pm 312 2006-11-15 10:15:34Z mackers $
+# $Id: vodasms.pm 352 2008-11-27 16:16:41Z mackers $
 
 package WWW::SMS::IE::vodasms;
 
@@ -10,9 +10,10 @@ Vodafone Ireland
 
 =head1 SYNOPSIS
 
+  require WWW::SMS::IE::iesms;
   require WWW::SMS::IE::vodasms;
 
-  my $carrier = new WWW::SMS::IE::iesms;
+  my $carrier = new WWW::SMS::IE::vodasms;
 
   if ($carrier->login('0871234567', 'password'))
   {
@@ -36,7 +37,7 @@ For more information see L<WWW::SMS::IE::iesms>
 use strict;
 use warnings;
 use vars qw( $VERSION );
-$VERSION = sprintf("0.%02d", q$Revision: 312 $ =~ /(\d+)/);
+$VERSION = sprintf("0.%02d", q$Revision: 352 $ =~ /(\d+)/);
 
 @WWW::SMS::IE::vodasms::ISA = qw{WWW::SMS::IE::iesms};
 

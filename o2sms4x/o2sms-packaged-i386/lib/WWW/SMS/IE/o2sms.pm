@@ -1,5 +1,5 @@
 #
-# $Id: o2sms.pm 288 2006-08-01 18:04:33Z mackers $
+# $Id: o2sms.pm 352 2008-11-27 16:16:41Z mackers $
 
 package WWW::SMS::IE::o2sms;
 
@@ -10,9 +10,10 @@ O2 Ireland
 
 =head1 SYNOPSIS
 
+  require WWW::SMS::IE::iesms;
   require WWW::SMS::IE::o2sms;
 
-  my $carrier = new WWW::SMS::IE::iesms;
+  my $carrier = new WWW::SMS::IE::o2sms;
 
   if ($carrier->login('o2_user', 'password'))
   {
@@ -36,7 +37,7 @@ For more information see L<WWW::SMS::IE::iesms>
 use strict;
 use warnings;
 use vars qw( $VERSION );
-$VERSION = sprintf("0.%02d", q$Revision: 288 $ =~ /(\d+)/);
+$VERSION = sprintf("0.%02d", q$Revision: 352 $ =~ /(\d+)/);
 
 @WWW::SMS::IE::o2sms::ISA = qw{WWW::SMS::IE::iesms};
 

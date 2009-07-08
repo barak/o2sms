@@ -1,5 +1,5 @@
 #
-# $Id: iesms.pm 333 2007-11-13 11:20:05Z mackers $
+# $Id: iesms.pm 350 2008-11-27 13:40:14Z mackers $
 
 package WWW::SMS::IE::iesms;
 
@@ -51,7 +51,7 @@ The following methods are available:
 use strict;
 use warnings;
 use vars qw( $VERSION );
-$VERSION = sprintf("0.%02d", q$Revision: 333 $ =~ /(\d+)/);
+$VERSION = sprintf("0.%02d", q$Revision: 350 $ =~ /(\d+)/);
 
 #use TestGen4Web::Runner 0.04;
 use File::stat;
@@ -117,9 +117,9 @@ sub _init_tg4w_runner
 
 	$self->{tg4w_runner} = new TestGen4Web::Runner(debug=>($self->debug()));
 
-	if ($self->{tg4w_runner}->VERSION < 0.07)
+	if ($self->{tg4w_runner}->VERSION < 0.11)
 	{
-		$self->_log_error("TestGen4Web::Runner version 0.07 or higher required");
+		$self->_log_error("TestGen4Web::Runner version 0.11 or higher required");
 
 		return 0;
 	}

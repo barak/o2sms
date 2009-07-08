@@ -1,5 +1,5 @@
 #
-# $Id: Runner.pm 55 2008-11-19 18:27:52Z mackers $
+# $Id: Runner.pm 58 2008-11-27 13:37:38Z mackers $
 
 package TestGen4Web::Runner;
 
@@ -58,7 +58,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION );
-$VERSION = '0.09';
+$VERSION = '0.11';
 
 use XML::Simple qw(:strict);
 use Data::Dumper;
@@ -419,7 +419,7 @@ sub _action_sink
 
 	if ($type eq 'goto')
 	{
-		if (defined($frame) && (!$self->{last_frame} || ($self->{last_frame} ne $frame)))
+		if (defined($frame))
 		{
 			$self->_log_debug("STEP$step: going to search for frame \"$frame\"");
 
@@ -553,7 +553,13 @@ sub _action_sink
 				$formnum = $formname;
 			}
 
-			$retval = $self->_submit_form($step, $formnum, $value);
+			#print Dumper($self->{filldata});
+
+			my $referer = $self->{action_state}->request()->uri->as_string;
+
+			$self->_log_debug("Using referer: $referer");
+
+			$retval = $self->_submit_form($step, $formnum, $value, $referer);
 		}
 		else
 		{
@@ -653,6 +659,33 @@ sub _action_sink
 		{
 			$self->_log_debug("no text match for \"$value\" in last response");
 			$self->{error} = "Assertion failed in step $step ($type): no match for \"$value\""; 
+
+			return 0;
+		}
+	}
+	elsif ($type eq 'var')
+	{
+		# match previous page with $xpath
+		# store result in $VARS{$value}
+
+		if (!$self->{action_state})
+		{
+			$self->_log_warn("STEP$step: skipping $type action; no previous request");
+			return 1;
+		}
+
+		if ($self->{action_state}->as_string() =~ m/$xpath/ism)
+		{
+			$self->_log_debug("text match for \"$xpath\" in last response: \"$1\". saving as replacement \"$value\".");
+
+			$self->{replacements}{$value} = $1;
+
+			return 1;
+		}
+		else
+		{
+			$self->_log_debug("no text match for \"$xpath\" in last response");
+			$self->{error} = "Assertion failed in step $step ($type): no match for \"$xpath\""; 
 
 			return 0;
 		}
@@ -870,6 +903,29 @@ sub _get_form_position
 
 	my @matches;
 
+	if ($formname =~ m/^!!/)
+	{
+		for (my $i=1000; $i<1010; $i++)
+		{
+			if ($self->{filldata}[$i])
+			{
+				if ($self->{filldata}[$i]->{"__tg4w_formname"} eq $formname)
+				{
+					# return existing magic form at this position
+					return $i;
+				}
+			}
+			else
+			{
+				# return new magic form at this position
+				$self->_log_debug("STEP$step: creating new magic form '$formname' at position $i");
+
+				$self->{filldata}[$i]->{"__tg4w_formname"} = $formname;
+				return $i;
+			}
+		}
+	}
+
 	if (!(@matches = ($self->{action_state}->as_string() =~ m/<form.*?>/gism)))
 	{
 		$self->{error} = "Unexpected failure in step $step (subtype submit_form); the document has no forms";
@@ -894,7 +950,7 @@ sub _get_form_position
 
 sub _submit_form
 {
-	my ($self, $step, $thisform, $action_override) = @_;
+	my ($self, $step, $thisform, $action_override, $referer) = @_;
 	my @matches;
 
 	if ($thisform =~ m/\D/)
@@ -908,7 +964,7 @@ sub _submit_form
 
 	$html =~ s/<!--.*?-->//gsm;
 	
-	if (!(@matches = ($html =~ m/<form.*?>.*?<\/form>/gism)))
+	if ($thisform < 1000 && !(@matches = ($html =~ m/<form.*?>.*?<\/form>/gism)))
 	{
 		$self->{error} = "Refresh failed in step $step (subtype submit_form); the document has no forms";
 		$self->_log_error("STEP$step: " . $self->{error});
@@ -916,7 +972,7 @@ sub _submit_form
 		return 0;
 	}
 
-	if (!$matches[($thisform-1)])
+	if ($thisform < 1000 && !$matches[($thisform-1)])
 	{
 		$self->{error} = "Refresh failed in step $step (subtype submit_form); form $thisform not found";
 		$self->_log_error("STEP$step: " . $self->{error});
@@ -924,20 +980,34 @@ sub _submit_form
 		return 0;
 	}
 	
-	if ($matches[$thisform-1] =~ m/(<form.*?>)(.*?)<\/form>/gism)
+	if ($thisform >= 1000 || $matches[$thisform-1] =~ m/(<form.*?>)(.*?)<\/form>/gism)
 	{
-		my $formtag = $1;
-		my $formbody = $2;
+		my $formtag = "";
+		my $formbody = "";
 		my $action = "";
 		my $method = "";
+
+		if ($thisform < 1000)
+		{
+			$formtag = $1;
+			$formbody = $2;
+			($formtag =~ m/method=["']?(get|post)["' ]?/i) && ($method = uc($1));
+		}
+		else
+		{
+			$method = "POST";
+		}
+
 		my $query_string = "";
 		my $req = HTTP::Request->new();
-
-		($formtag =~ m/method=["']?(get|post)["' ]?/i) && ($method = uc($1));
 
 		if ($action_override && $action_override ne "" && $action_override =~ m/^http/)
 		{
 			$action = $action_override;
+
+			# do replacements in $action
+
+			$action =~ s/{(\w+?)}/$self->{replacements}{$1}/ge;
 		}
 		else
 		{
@@ -947,36 +1017,47 @@ sub _submit_form
 
 #$self->_log_debug("11111111 $formbody 11111111");
 
-		foreach my $input ($formbody =~ m/(<(input|textarea).*?>)/gism)
+		if ($thisform < 1000)
 		{
-			my $name = "";
-			my $value = "";
-			#my $type = "";
-
-			($input =~ m/name=["']?(.*?)["' >]/i) && ($name = $1);
-			($input =~ m/value=["']?(.*?)["' >]/i) && ($value = $1);
-			#($input =~ m/type=["']?(.*?)["' >]/i) && ($type = $1);
-
-#$self->_log_debug("Found input $name");
-
-			if ($name eq "") # || $type eq "image" || $type eq "submit")
+			foreach my $input ($formbody =~ m/(<(input|textarea).*?>)/gism)
 			{
-				next;
+				my $name = "";
+				my $value = "";
+				#my $type = "";
+
+				($input =~ m/name=["']?(.*?)["' >]/i) && ($name = $1);
+				($input =~ m/value=["']?(.*?)["' >]/i) && ($value = $1);
+				#($input =~ m/type=["']?(.*?)["' >]/i) && ($type = $1);
+
+				if ($name eq "") # || $type eq "image" || $type eq "submit")
+				{
+					next;
+				}
+
+				if ($self->{filldata}[$thisform]->{$name})
+				{
+					$query_string .= "$name=" . uri_escape($self->{filldata}[$thisform]->{$name});
+				}
+				else
+				{
+					$query_string .= "$name=" . uri_escape($value);
+				}
+
+				$query_string .= '&';
 			}
 
-			if ($self->{filldata}[$thisform]->{$name})
-			{
-				$query_string .= "$name=" . uri_escape($self->{filldata}[$thisform]->{$name});
-			}
-			else
-			{
-				$query_string .= "$name=" . uri_escape($value);
-			}
-
-			$query_string .= '&';
+			$query_string .= "x=1&y=1";
 		}
-
-		$query_string .= "x=1&y=1";
+		else
+		{
+			foreach my $key (keys (%{$self->{filldata}[$thisform]}))
+			{
+				if ($key !~ m/^__tg4w/)
+				{
+					$query_string .= $key . "=" . uri_escape($self->{filldata}[$thisform]->{$key}) . "&";
+				}
+			}
+		}
 
 		if ($method eq 'POST')
 		{
@@ -993,6 +1074,11 @@ sub _submit_form
 			$self->{error} = "Unsupported form method: '$method' in form tag '$formtag'"; 
 			$self->_log_error("STEP$step: " . $self->{error});
 			return 0;
+		}
+
+		if ($referer)
+		{
+			$req->push_header("Referer" => $referer);
 		}
 
 		$req->uri($action);

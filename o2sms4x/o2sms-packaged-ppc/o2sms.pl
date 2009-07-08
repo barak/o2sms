@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# $Id: o2sms 344 2008-10-10 15:22:27Z mackers $
+# $Id: o2sms 350 2008-11-27 13:40:14Z mackers $
 
 =head1 o2sms
 
@@ -21,8 +21,8 @@ provider before using the program.
 use strict;
 use warnings;
 use vars qw( $VERSION );
-#$VERSION = sprintf("3.%02d", q$Revision: 344 $ =~ m/(\d+)/);
-$VERSION = '3.30';
+#$VERSION = sprintf("3.%02d", q$Revision: 350 $ =~ m/(\d+)/);
+$VERSION = '3.33';
 
 # -- modules
 use File::stat;
@@ -44,7 +44,7 @@ use constant EXIT_SUCCESS => 0;
 use constant EXIT_FAILURE => 1; # shell error status
 
 # -- global vars
-my $svnid = '$Id: o2sms 344 2008-10-10 15:22:27Z mackers $';
+my $svnid = '$Id: o2sms 350 2008-11-27 13:40:14Z mackers $';
 
 my $sms_max_length = 500;
 my $man_delim = "\\\\\\\\";
