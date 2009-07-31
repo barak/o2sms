@@ -8,6 +8,7 @@
 # Copyright 2004 "Daniel Pearson" <daniel@nanoo.org>
 # Copyright 2005 "Ivan Kelly" <ivan@ivankelly.net>
 # Copyright 2006 "David McNamara" <http://www.mackers.com/>
+# Copyright 2009 "James McDermott" <http://www.skynet.ie/~jmmcd/>
 #
 have o2sms &&
 _o2sms()
@@ -24,7 +25,7 @@ _o2sms()
 		--reuse-cookies -r --hard-split -k --emulate-t9 -t9 --squeeze-text -z \
 		--history -h --version --help -h --debug'
 
-        names=`cat .o2sms/config | awk '/^alias/ { print $2 }'`
+        names=`cat ~/.o2sms/config | awk '/^alias/ { print $2 }'`
 	paroptions="$options $names"
 	
         COMPREPLY=($( compgen -W "$paroptions" | grep ^$cur ))
