@@ -1,3 +1,9 @@
+o2sms (3.34-1) unstable; urgency=low
+  
+  * Fixed meteor support
+
+ -- David McNamara <me@mackers.com>  Mon, 24 Aug 2009 13:00:00 +0000
+
 o2sms (3.33-1) unstable; urgency=low
   
   * Added SMS::Send drivers.

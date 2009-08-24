@@ -22,7 +22,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 #$VERSION = sprintf("3.%02d", q$Revision: 350 $ =~ m/(\d+)/);
-$VERSION = '3.33';
+$VERSION = '3.34';
 
 # -- modules
 use File::stat;

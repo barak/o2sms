@@ -1,6 +1,10 @@
 Revision history for Perl module WWW::SMS::IE::iesms
 
-3.33		2008-05-07
+3.34            2009-08-24
+
+	Fixed meteor support.
+
+3.33		2009-05-07
 
 	Added SMS::Send drivers.
     Fixed o2 support
