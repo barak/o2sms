@@ -29,7 +29,7 @@
         </action>
         <action type="assert-text-exists" step="6">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[MyMeteor Overview]]></value>
+            <value><![CDATA[My Meteor]]></value>
         </action>
 
         <action type="goto" refresh="true" window="." step="7">
