@@ -58,7 +58,7 @@
         </action>
         <action type="click" refresh="true" step="13">
             <xpath><![CDATA[*/FORM[@NAME="!!ajax1"]/]]></xpath>
-            <value><![CDATA[https://www.mymeteor.ie/mymeteorapi/index.cfm?event=smsAjax&CFID={CFID}&CFTOKEN={CFTOKEN}&func=addEnteredMsisdns]]></value> <!-- TODO implement this -->
+            <value><![CDATA[https://www.mymeteor.ie/mymeteorapi/index.cfm?event=smsAjax&CFID={CFID}&CFTOKEN={CFTOKEN}&func=addEnteredMsisdns]]></value> 
         </action>
 
         <action type="fill" window="." step="14">

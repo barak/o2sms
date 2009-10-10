@@ -73,7 +73,7 @@ CONFIGURATION FILE
 
 SEE ALSO
     WWW::SMS::IE::iesms, WWW::SMS::IE::o2sms, WWW::SMS::IE::vodasms,
-    WWW::SMS::IE::meteorsms
+    WWW::SMS::IE::meteorsms, WWW::SMS::IE::threesms
 
     <http://www.mackers.com/projects/o2sms>
 

@@ -9,6 +9,7 @@ use WWW::SMS::IE::iesms;
 use WWW::SMS::IE::o2sms;
 use WWW::SMS::IE::vodasms;
 use WWW::SMS::IE::meteorsms;
+use WWW::SMS::IE::threesms;
 use Getopt::Long 2.33;
 use vars qw( $VERSION );
 use Data::Dumper;
@@ -153,7 +154,7 @@ $loginWin->AddCombobox(
 	-simple		=> 1,
 	);
 
-$loginWin->CarrierLst->Add('o2.ie', 'vodafone.ie', 'meteor.ie');
+$loginWin->CarrierLst->Add('o2.ie', 'vodafone.ie', 'meteor.ie', 'three.ie');
 $loginWin->CarrierLst->Select(0);
 
 $loginWin->AddButton(
@@ -300,9 +301,12 @@ sub LoginBut_Click
 	elsif ($carrierSel == 2)
 	{
 		$carrier = new WWW::SMS::IE::meteorsms;
-		#Error_MessageBox("Meteor not currently supported!"); return 1;
 	}
-	
+	elsif ($carrierSel == 3)
+	{
+		$carrier = new WWW::SMS::IE::threesms;
+	}
+		
 	# set up carrier
 	$carrier->debug($debug);
 

@@ -22,7 +22,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 #$VERSION = sprintf("3.%02d", q$Revision: 350 $ =~ m/(\d+)/);
-$VERSION = '3.34';
+$VERSION = '3.35';
 
 # -- modules
 use File::stat;
@@ -286,6 +286,10 @@ sub guess_carrier_name
 	elsif ($0 =~ m/o2sms(\.pl)?$/i)
 	{
 		return "o2";
+	}
+	elsif ($0 =~ m/(three|3)sms(\.pl)?$/i)
+	{
+		return "three";
 	}
 	elsif ($0 =~ m/aft(sms)?(\.pl)?$/i)
 	{
@@ -868,6 +872,11 @@ sub get_carrier
 		use WWW::SMS::IE::o2sms;
 		return WWW::SMS::IE::o2sms->new;
 	}
+	elsif ($_[0] eq "three")
+	{
+		use WWW::SMS::IE::threesms;
+		return WWW::SMS::IE::threesms->new;
+	}
 	elsif ($_[0] eq "aft")
 	{
 		use WWW::SMS::IE::aftsms;
@@ -1178,7 +1187,7 @@ Append this text to every message
 
 =item B<-C, --carrier=NAME>
 
-Force the carrier to be this ("o2", "vodafone" or "meteor" (or "aft"))
+Force the carrier to be this ("o2", "vodafone", "meteor" or "three" (or "aft"))
 
 =item B<-m, --message=STRING>
 
@@ -1209,8 +1218,8 @@ Print version and exit
 =head1 CONFIGURATION FILE
 
 Configuration is in the file C<~/.o2sms/config> (or C<~/.vodasms/config> or
-C<~/.meteorsms/config>) (or C<~/.aftsms/config>) or can be overwritten with
-the -c / --config-file command line option.
+C<~/.meteorsms/config> or C<~/.threesms/config>) (or C<~/.aftsms/config>) or
+can be overwritten with the -c / --config-file command line option.
 
 Values in this file are stored as one per line and take the same name and
 format as their command line equivalents.
@@ -1232,6 +1241,7 @@ Configuration file example:
 L<WWW::SMS::IE::iesms>,
 L<WWW::SMS::IE::o2sms>,
 L<WWW::SMS::IE::vodasms>,
+L<WWW::SMS::IE::threesms>,
 L<WWW::SMS::IE::aftsms>,
 L<WWW::SMS::IE::meteorsms> 
 

@@ -6,7 +6,7 @@ WriteMakefile(
 	ABSTRACT	=> 'A module to send SMS messages using .ie websites',
 	AUTHOR		=> 'mackers',
 	VERSION_FROM	=> 'bin/o2sms',
-	EXE_FILES     => [ 'bin/o2sms', 'bin/vodasms', 'bin/meteorsms', 'bin/aftsms' ],
+	EXE_FILES     => [ 'bin/o2sms', 'bin/vodasms', 'bin/meteorsms', 'bin/threesms', 'bin/aftsms' ],
 	PREREQ_PM	=> {
 		Getopt::Long		=> 2.33,
 		Term::ReadLine		=> 0,
@@ -54,6 +54,7 @@ publish-mackers.com: dist
 	/usr/bin/pod2html -title WWW::SMS::IE::iesms -htmlroot . lib/WWW/SMS/IE/iesms.pm > /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/docs/v3/WWW/SMS/IE/iesms.html
 	/usr/bin/pod2html -title WWW::SMS::IE::o2sms -htmlroot . lib/WWW/SMS/IE/o2sms.pm > /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/docs/v3/WWW/SMS/IE/o2sms.html
 	/usr/bin/pod2html -title WWW::SMS::IE::vodasms -htmlroot . lib/WWW/SMS/IE/vodasms.pm > /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/docs/v3/WWW/SMS/IE/vodasms.html
+	/usr/bin/pod2html -title WWW::SMS::IE::threesms -htmlroot . lib/WWW/SMS/IE/threesms.pm > /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/docs/v3/WWW/SMS/IE/threesms.html
 	/usr/bin/pod2html -title WWW::SMS::IE::meteorsms -htmlroot . lib/WWW/SMS/IE/meteorsms.pm > /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/docs/v3/WWW/SMS/IE/meteorsms.html
 	find . -name '*.tmp' | xargs rm
 	cp `ls -1t *.tar.gz | head -1` /var/www/hosts/www.mackers.com/htdocs/projects/o2sms/releases/
@@ -72,6 +73,7 @@ exe:
 	-a "lib/WWW/SMS/IE/vodasms.action;./lib/WWW/SMS/IE/vodasms.action" \
 	-a "lib/WWW/SMS/IE/o2sms.action;./lib/WWW/SMS/IE/o2sms.action" \
 	-a "lib/WWW/SMS/IE/meteorsms.action;./lib/WWW/SMS/IE/meteorsms.action" \
+	-a "lib/WWW/SMS/IE/threesms.action;./lib/WWW/SMS/IE/threesms.action" \
 	-o o2sms4w.exe \
 	-l c:/perl/bin/libeay32.dll \
 	-l c:/perl/bin/ssleay32.dll \
