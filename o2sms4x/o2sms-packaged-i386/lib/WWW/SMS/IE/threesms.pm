@@ -1,21 +1,21 @@
 #
-# $Id: vodasms.pm 352 2008-11-27 16:16:41Z mackers $
+# $Id$
 
-package WWW::SMS::IE::vodasms;
+package WWW::SMS::IE::threesms;
 
 =head1 NAME
 
-WWW::SMS::IE::vodasms - A module to send SMS messages using the website of 
-Vodafone Ireland
+WWW::SMS::IE::threesms - A module to send SMS messages using the website of 
+Three Ireland
 
 =head1 SYNOPSIS
 
   require WWW::SMS::IE::iesms;
-  require WWW::SMS::IE::vodasms;
+  require WWW::SMS::IE::threesms;
 
-  my $carrier = new WWW::SMS::IE::vodasms;
+  my $carrier = new WWW::SMS::IE::threesms;
 
-  if ($carrier->login('0871234567', 'password'))
+  if ($carrier->login('0831234567', 'password'))
   {
     my $retval = $carrier->send('+353865551234', 'Hello World!');
 
@@ -27,8 +27,8 @@ Vodafone Ireland
 
 =head1 DESCRIPTION
 
-L<WWW::SMS::IE::vodasms> is a class to send SMS messages via the command line
-using the website of Vodafone Ireland -- http://www.vodafone.ie/
+L<WWW::SMS::IE::threesms> is a class to send SMS messages via the command line
+using the website of Three Ireland -- http://www.three.ie/
 
 For more information see L<WWW::SMS::IE::iesms>
 
@@ -39,24 +39,24 @@ use warnings;
 use vars qw( $VERSION );
 $VERSION = sprintf("0.%02d", q$Revision: 352 $ =~ /(\d+)/);
 
-@WWW::SMS::IE::vodasms::ISA = qw{WWW::SMS::IE::iesms};
+@WWW::SMS::IE::threesms::ISA = qw{WWW::SMS::IE::iesms};
 
 use constant LOGIN_START_STEP => 0;
-use constant LOGIN_END_STEP => 5;
-use constant SEND_START_STEP => 6;
+use constant LOGIN_END_STEP => 2;
+use constant SEND_START_STEP => 3;
 use constant SEND_END_STEP => undef;
 use constant REMAINING_MESSAGES_MATCH => 1;
-use constant ACTION_FILE => "vodasms.action";
-use constant SIMULATED_DELAY_MIN => 10;
-use constant SIMULATED_DELAY_MAX => 35;
-use constant SIMULATED_DELAY_PERCHAR => 0.25;
-use constant MINIMUM_MESSAGE_LENGTH => 3;
+use constant ACTION_FILE => "threesms.action";
+use constant SIMULATED_DELAY_MIN => 0;
+use constant SIMULATED_DELAY_MAX => 0;
+use constant SIMULATED_DELAY_PERCHAR => 0;
+use constant MINIMUM_MESSAGE_LENGTH => 1;
 
 sub _init
 {
 	my $self = shift;
 
-	$self->_log_debug("creating new instance of vodasms carrier");
+	$self->_log_debug("creating new instance of three carrier");
 
 	$self->_login_start_step(LOGIN_START_STEP);
 	$self->_login_end_step(LOGIN_END_STEP);
@@ -68,21 +68,21 @@ sub _init
 	$self->_simulated_delay_min(SIMULATED_DELAY_MIN);
 	$self->_simulated_delay_perchar(SIMULATED_DELAY_PERCHAR);
 	
-	$self->full_name("Vodafone Ireland");
-	$self->domain_name("vodafone.ie");
+	$self->full_name("Three Ireland");
+	$self->domain_name("three.ie");
 
 	if ($self->is_win32())
 	{
 		$self->config_dir($ENV{TMP});
-		$self->config_file($self->_get_home_dir() . "vodasms.ini");
-		$self->message_file("vodasms_lastmsg.txt");
-		$self->history_file("vodasms_history.txt");
-		$self->cookie_file("vodasms.cookie");
-		$self->action_state_file("vodasms.state");
+		$self->config_file($self->_get_home_dir() . "threesms.ini");
+		$self->message_file("threesms_lastmsg.txt");
+		$self->history_file("threesms_history.txt");
+		$self->cookie_file("threesms.cookie");
+		$self->action_state_file("threesms.state");
 	}
 	else
 	{
-		$self->config_dir($self->_get_home_dir() . "/.vodasms/");
+		$self->config_dir($self->_get_home_dir() . "/.threesms/");
 		$self->config_file("config");
 		$self->message_file("lastmsg");
 		$self->history_file("history");
@@ -95,7 +95,8 @@ sub _format_number
 {
 	my ($self, $number) = @_;
 
-	$number =~ s/^\+353/0/;
+	$number =~ s/^0/353/;
+	$number =~ s/^\+//;
 
 	return $number;
 }
@@ -106,7 +107,7 @@ sub _is_valid_number
 
 	if ($number !~ /^\+353/)
 	{
-		$self->validate_number_error("Vodafone webtexts can only be sent to Irish mobile numbers");
+		$self->validate_number_error("Three webtexts can only be sent to Irish mobile numbers");
 		return 0;
 	}
 
@@ -118,7 +119,7 @@ sub min_length
         return MINIMUM_MESSAGE_LENGTH;
 }
 
-sub is_vodafone
+sub is_three
 {
 	return 1;
 }

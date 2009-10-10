@@ -42,8 +42,8 @@ $VERSION = sprintf("0.%02d", q$Revision: 352 $ =~ /(\d+)/);
 @WWW::SMS::IE::vodasms::ISA = qw{WWW::SMS::IE::iesms};
 
 use constant LOGIN_START_STEP => 0;
-use constant LOGIN_END_STEP => 6;
-use constant SEND_START_STEP => 7;
+use constant LOGIN_END_STEP => 5;
+use constant SEND_START_STEP => 6;
 use constant SEND_END_STEP => undef;
 use constant REMAINING_MESSAGES_MATCH => 1;
 use constant ACTION_FILE => "vodasms.action";

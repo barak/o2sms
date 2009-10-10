@@ -39,8 +39,9 @@ browser's interaction with those websites. This module requires a valid web
 account with O2 Ireland, Vodafone Ireland or Meteor Ireland.
 
 The L<WWW::SMS::IE::iesms> class is abstract, i.e. it is only used as a base
-class for L<WWW::SMS::IE::o2sms>, L<WWW::SMS::IE::vodasms> and
-L<WWW::SMS::IE::meteorsms> and should never be instantiated as itself.
+class for L<WWW::SMS::IE::o2sms>, L<WWW::SMS::IE::vodasms>,
+L<WWW::SMS::IE::meteorsms> and L<WWW::SMS::IE::threesms> and should never be
+instantiated as itself.
 
 The following methods are available:
 
@@ -64,6 +65,7 @@ use Data::Dumper;
 use constant LOGIN_LIFETIME => 60 * 30;
 use constant TG4W_VERIFY_TITLES => 0;
 use constant TG4W_QUIET => 0;
+$Storable::forgive_me = 1; 
 
 my %iesms_user_agent_strings = (
 	"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" => 1.0,
@@ -85,10 +87,10 @@ my %iesms_user_agent_strings = (
 
 =item $carrier = new WWW::SMS::IE::iesms
 
-This is the object constructor. It should only be called internally
-by this library. External code should construct 
-L<WWW::SMS::IE::o2sms>, L<WWW::SMS::IE::vodasms> and L<WWW::SMS::IE::meteorsms> 
-(and L<WWW::SMS::IE::aftsms>) objects.
+This is the object constructor. It should only be called internally by this
+library. External code should construct L<WWW::SMS::IE::o2sms>,
+L<WWW::SMS::IE::vodasms>, L<WWW::SMS::IE::meteorsms> and
+L<WWW::SMS::IE::threesms> (and L<WWW::SMS::IE::aftsms>) objects.
 
 =cut
 
@@ -665,6 +667,8 @@ sub domain_name
 
 =item $carrier->is_meteor()
 
+=item $carrier->is_three()
+
 =item $carrier->is_aft()
 
 These methods are used to determine what subclass is extending this class.
@@ -682,6 +686,11 @@ sub is_o2
 }
 
 sub is_meteor
+{
+	return 0;
+}
+
+sub is_three
 {
 	return 0;
 }
@@ -1086,6 +1095,7 @@ provider before using the program.
 L<WWW::SMS::IE::o2sms>,
 L<WWW::SMS::IE::vodasms>,
 L<WWW::SMS::IE::meteorsms>,
+L<WWW::SMS::IE::threesms>,
 L<WWW::SMS::IE::aftsms> 
 
 L<http://www.mackers.com/projects/o2sms/>
