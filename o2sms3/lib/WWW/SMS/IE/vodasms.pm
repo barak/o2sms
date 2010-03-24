@@ -100,19 +100,6 @@ sub _format_number
 	return $number;
 }
 
-sub _is_valid_number
-{
-	my ($self, $number) = @_;
-
-	if ($number !~ /^\+353/)
-	{
-		$self->validate_number_error("Vodafone webtexts can only be sent to Irish mobile numbers");
-		return 0;
-	}
-
-	return 1;
-}
-
 sub min_length
 {
         return MINIMUM_MESSAGE_LENGTH;

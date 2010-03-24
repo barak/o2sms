@@ -22,7 +22,7 @@ use strict;
 use warnings;
 use vars qw( $VERSION );
 #$VERSION = sprintf("3.%02d", q$Revision: 350 $ =~ m/(\d+)/);
-$VERSION = '3.35';
+$VERSION = '3.36';
 
 # -- modules
 use File::stat;
@@ -102,7 +102,7 @@ my %options = (
 	"hard-split|k!"	=> \$hard_split,
 	"emulate-t9|t9!"	=> \$emulate_t9,
 	"squeeze-text|squeeze|z!"	=> \$squeeze_text,
-	"history|h|"	=> \$write_history,
+	"history|h"	=> \$write_history,
 	#"version|v"	=> sub { &print_version_and_exit(0) },
 	"help|usage|h"	=> sub { &print_usage_and_exit(0) },
 	"debug|verbose|d|V+"	=> \$debug_level,

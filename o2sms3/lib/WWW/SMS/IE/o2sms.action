@@ -41,23 +41,23 @@
         </action>
         <action type="assert-text-exists" refresh="true" step="9">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[Number of free text messages remaining this month: <strong>(\d+)</strong>]]></value>
+            <value><![CDATA[<span id="spn_WebtextFree">(\d+)</span> free texts left for this month]]></value>
         </action>
         <action type="verify-title" window="." step="10">
             <xpath><![CDATA[*]]></xpath>
             <value><![CDATA[Messaging : Mobile Phones and Broadband : Telefónica O2 : Ireland]]></value>
         </action>
         <action type="fill" window="." step="11">
-            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/*/TEXTAREA[@NAME="SMSTo"]]]></xpath>
+            <xpath><![CDATA[*/FORM[@NAME="form_WebtextSend"]/*/INPUT[@NAME="SMSTo"]]]></xpath>
             <value><![CDATA[{recipient}]]></value>
         </action>
         <action type="fill" window="." step="12">
-            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/*/TEXTAREA[@ID="SMSText"]]]></xpath>
+            <xpath><![CDATA[*/FORM[@NAME="form_WebtextSend"]/*/INPUT[@ID="SMSText"]]]></xpath>
             <value><![CDATA[{message}]]></value>
         </action>
         <action type="click" refresh="true" step="13">
-            <xpath><![CDATA[*/FORM[@NAME="frmSMS"]/]]></xpath>
-            <value><![CDATA[http://messaging.o2online.ie/smscenter_send.osp?MsgContentID=-1&SID=_&SID=8240509_utusnutl]]></value>
+            <xpath><![CDATA[*/FORM[@NAME="form_WebtextSend"]/]]></xpath>
+            <value><![CDATA[http://messaging.o2online.ie/smscenter_send.osp]]></value>
         </action>
         <action type="goto" refresh=".,." window="." step="14">
             <xpath><![CDATA[window.location.href]]></xpath>
@@ -65,7 +65,7 @@
         </action>
         <action type="assert-text-exists" refresh="true" step="15">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[Number of free text messages remaining this month: <strong>(\d+)</strong>]]></value>
+            <value><![CDATA[<span id="spn_WebtextFree">(\d+)</span> free texts left for this month]]></value>
         </action>
     </actions>
 </tg4w>
