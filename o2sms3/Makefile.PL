@@ -30,7 +30,7 @@ publish-cpan: dist
 	/usr/local/bin/cpan-upload -user mackers -mailto me@mackers.com -verbose `ls -1t *.tar.gz | head -1`
 
 publish-sf: dist
-	/usr/bin/scp `ls -1t *.tar.gz | head -1` mackers@frs.sourceforge.net:uploads/
+	/usr/bin/scp `ls -1t *.tar.gz | head -1` mackers@frs.sourceforge.net:/home/pfs/project/o/o2/o2sms/
 
 debuild: META.yml dist
 	mkdir /tmp/debuild-o2sms/
