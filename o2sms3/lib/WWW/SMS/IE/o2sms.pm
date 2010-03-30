@@ -94,7 +94,7 @@ sub _format_number
 {
 	my ($self, $number) = @_;
 
-	$number =~ s/^\+//;
+	$number =~ s/^\+/00/;
 
 	return $number;
 }
