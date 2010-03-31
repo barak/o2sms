@@ -6,6 +6,8 @@ Maintainer: David McNamara <me@mackers.com>
 Uploaders: Barak A. Pearlmutter <bap@debian.org>
 Standards-Version: 3.8.4
 Homepage: http://o2sms.sourceforge.net/
+Vcs-Git: git://git.debian.org/git/collab-maint/o2sms.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/o2sms.git
 Build-Depends-Indep: libcrypt-ssleay-perl, libio-socket-ssl-perl,
  libnet-ssleay-perl, liburi-perl (>= 1.26), perl
 
