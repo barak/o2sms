@@ -1,9 +1,11 @@
 o2sms (3.36-1) unstable; urgency=low
 
-  * Fixed O2 support
-  * Raise debian standards level
-  * Raise debhelper compat level
-  * Shorten debian/rules
+  * New upstream release
+  * Update Debian packaging
+    - Raise debian standards level
+    - Raise debhelper compat level
+    - Shorten debian/rules
+    - Include repository information
 
  -- Barak A. Pearlmutter <bap@debian.org>  Mon, 29 Mar 2010 11:32:12 +0100
 
