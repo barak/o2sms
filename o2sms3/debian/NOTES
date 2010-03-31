@@ -1,0 +1,6 @@
+Upstream SVN repo: https://o2sms.svn.sourceforge.net/svnroot/o2sms
+To fetch into Debian git repo,
+ git config svn-remote.svn.url https://o2sms.svn.sourceforge.net/svnroot/o2sms
+ git config svn-remote.svn.fetch trunk:refs/remotes/svn/trunk
+ git config svn-remote.svn.branches 'branches/*:refs/remotes/svn/*'
+ git config svn-remote.svn.tags tags/*:refs/remotes/tags/svn/*
