@@ -85,7 +85,7 @@
         </action>
 	<action type="assert-text-exists" step="19">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[Free web texts left <input type="text" value="(\d+)"]]></value>
+	    <value><![CDATA[Free web texts left <input type="text" .*? value="(\d+)"]]></value>
         </action>
     </actions>
 </tg4w>
