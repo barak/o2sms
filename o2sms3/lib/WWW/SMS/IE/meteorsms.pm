@@ -104,6 +104,11 @@ sub _format_number
 	return $number;
 }
 
+sub max_length
+{
+  return 480;
+}
+
 
 =head1 DISCLAIMER
 
