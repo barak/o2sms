@@ -14,8 +14,8 @@ lib/WWW/SMS/IE/threesms.pm
 lib/WWW/SMS/IE/threesms.action
 lib/WWW/SMS/IE/aftsms.pm
 lib/WWW/SMS/IE/aftsms.action
-lib/WWW/SMS/IE/emobile.pm
-lib/WWW/SMS/IE/emobile.action
+lib/WWW/SMS/IE/emobilesms.pm
+lib/WWW/SMS/IE/emobilesms.action
 bin/o2sms
 bin/vodasms
 bin/meteorsms
