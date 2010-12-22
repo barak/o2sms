@@ -36,10 +36,10 @@ To extend this class:
 L<WWW::SMS::IE::iesms> is a module to send SMS messages via the command line
 using the websites of Irish mobile operators. This is done by simulating a web
 browser's interaction with those websites. This module requires a valid web
-account with O2 Ireland, Vodafone Ireland or Meteor Ireland.
+account with O2 Ireland, Vodafone Ireland, eMobile Ireland or Meteor Ireland.
 
 The L<WWW::SMS::IE::iesms> class is abstract, i.e. it is only used as a base
-class for L<WWW::SMS::IE::o2sms>, L<WWW::SMS::IE::vodasms>,
+class for L<WWW::SMS::IE::o2sms>, L<WWW::SMS::IE::vodasms>, L<WWW::SMS::IE::emobilesms>,
 L<WWW::SMS::IE::meteorsms> and L<WWW::SMS::IE::threesms> and should never be
 instantiated as itself.
 
@@ -89,7 +89,7 @@ my %iesms_user_agent_strings = (
 
 This is the object constructor. It should only be called internally by this
 library. External code should construct L<WWW::SMS::IE::o2sms>,
-L<WWW::SMS::IE::vodasms>, L<WWW::SMS::IE::meteorsms> and
+L<WWW::SMS::IE::vodasms>, L<WWW::SMS::IE::meteorsms>, L<WWW::SMS::IE::emobilesms> and
 L<WWW::SMS::IE::threesms> (and L<WWW::SMS::IE::aftsms>) objects.
 
 =cut
@@ -667,6 +667,8 @@ sub domain_name
 
 =item $carrier->is_meteor()
 
+=item $carrier->is_emobile()
+
 =item $carrier->is_three()
 
 =item $carrier->is_aft()
@@ -696,6 +698,11 @@ sub is_three
 }
 
 sub is_aft
+{
+	return 0;
+}
+
+sub is_emobile
 {
 	return 0;
 }
@@ -1096,7 +1103,8 @@ L<WWW::SMS::IE::o2sms>,
 L<WWW::SMS::IE::vodasms>,
 L<WWW::SMS::IE::meteorsms>,
 L<WWW::SMS::IE::threesms>,
-L<WWW::SMS::IE::aftsms> 
+L<WWW::SMS::IE::aftsms>, 
+L<WWW::SMS::IE::emobile> 
 
 L<http://www.mackers.com/projects/o2sms/>
 
@@ -1111,7 +1119,7 @@ Copyright 2000-2006 David McNamara
 This program is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
 
-=cut
+cut
 
 1;
 

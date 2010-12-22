@@ -10,7 +10,7 @@ o2sms - A perl script to send SMS messages using .ie websites.
 C<o2sms> is a script to send SMS messages via the command line using the websites
 of Irish mobile operators. This is done by simulating a web browser's
 interaction with those websites. This script requires a valid web account with
-O2 Ireland, Vodafone Ireland or Meteor Ireland.
+O2 Ireland, Vodafone Ireland, Emobile Ireland, or Meteor Ireland.
  
 The author accepts no responsibility nor liability for your use of this
 software.  Please read the terms and conditions of the website of your mobile
@@ -294,6 +294,10 @@ sub guess_carrier_name
 	elsif ($0 =~ m/aft(sms)?(\.pl)?$/i)
 	{
 		return "aft";
+	}
+	elsif ($0 =~ m/emobile(sms)?(\.pl)?$/i)
+	{
+		return "emobile";
 	}
 	else
 	{
@@ -882,6 +886,11 @@ sub get_carrier
 		use WWW::SMS::IE::aftsms;
 		return WWW::SMS::IE::aftsms->new;
 	}
+	elsif ($_[0] eq "emobile")
+	{
+		use WWW::SMS::IE::emobilesms;
+		return WWW::SMS::IE::emobilesms->new;
+	}
 	else
 	{
 		&log_fatal("Invalid carrier name '" . $_[0] . "'");
@@ -1187,7 +1196,7 @@ Append this text to every message
 
 =item B<-C, --carrier=NAME>
 
-Force the carrier to be this ("o2", "vodafone", "meteor" or "three" (or "aft"))
+Force the carrier to be this ("o2", "vodafone", "meteor", "three", "aft" or "emobile")
 
 =item B<-m, --message=STRING>
 
@@ -1219,7 +1228,7 @@ Print version and exit
 
 Configuration is in the file C<~/.o2sms/config> (or C<~/.vodasms/config> or
 C<~/.meteorsms/config> or C<~/.threesms/config>) (or C<~/.aftsms/config>) or
-can be overwritten with the -c / --config-file command line option.
+C<~/.emobilesms/config> can be overwritten with the -c / --config-file command line option.
 
 Values in this file are stored as one per line and take the same name and
 format as their command line equivalents.
@@ -1243,7 +1252,8 @@ L<WWW::SMS::IE::o2sms>,
 L<WWW::SMS::IE::vodasms>,
 L<WWW::SMS::IE::threesms>,
 L<WWW::SMS::IE::aftsms>,
-L<WWW::SMS::IE::meteorsms> 
+L<WWW::SMS::IE::meteorsms>,
+L<WWW::SMS::IE::emobilesms> 
 
 L<http://www.mackers.com/projects/o2sms/>
 
