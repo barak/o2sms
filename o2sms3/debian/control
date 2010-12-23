@@ -20,4 +20,4 @@ Description: A module to send SMS messages using .ie websites
  WWW::SMS::IE::iesms is a module to send SMS messages via the command line
  using the websites of Irish mobile operators. This is done by simulating a web
  browser's interaction with those websites. This module requires a valid web
- account with O2 Ireland, Vodafone Ireland or Meteor Ireland.
+ account with O2 Ireland, Vodafone Ireland, Meteor Ireland, or eMobile Ireland.
