@@ -1,3 +1,9 @@
+o2sms (3.36-2) unstable; urgency=low
+
+  * Integrate upstream adding eMobile Ireland
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Thu, 23 Dec 2010 08:41:04 -0500
+
 o2sms (3.36-1) unstable; urgency=low
 
   * New upstream release
