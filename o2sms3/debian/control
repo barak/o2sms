@@ -1,7 +1,7 @@
 Source: o2sms
 Section: perl
 Priority: optional
-Build-Depends: debhelper (>= 7)
+Build-Depends: debhelper (>= 8)
 Maintainer: David McNamara <me@mackers.com>
 Uploaders: Barak A. Pearlmutter <bap@debian.org>
 Standards-Version: 3.8.4
