@@ -9,7 +9,7 @@
         </action>
         <action type="verify-title" window="." step="1">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[Meteor: MyMeteor Login]]></value>
+            <value><![CDATA[Meteor Mobile: Pay As You Go, Bill Pay Phones & Mobile Broadband]]></value>
         </action>
         <action type="fill" window="." step="2">
             <xpath><![CDATA[*/FORM[1]/*/INPUT[@ID="username"]]]></xpath>
@@ -29,7 +29,7 @@
         </action>
         <action type="assert-text-exists" step="6">
             <xpath><![CDATA[*]]></xpath>
-            <value><![CDATA[My Meteor]]></value>
+            <value><![CDATA[MyMeteor Home]]></value>
         </action>
 
         <action type="goto" refresh="true" window="." step="7">
