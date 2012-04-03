@@ -1,3 +1,11 @@
+o2sms (3.36-2) unstable; urgency=low
+
+  * Update Debian packaging
+    - Raise debian standards level to 3.9.3
+    - Raise debhelper compat level to 9
+
+ -- Barak A. Pearlmutter <bap@debian.org>  Tue, 03 Apr 2012 09:24:12 +0100
+
 o2sms (3.36-1) unstable; urgency=low
 
   * New upstream release
