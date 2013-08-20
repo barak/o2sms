@@ -4,7 +4,7 @@ Priority: optional
 Build-Depends: debhelper (>= 9)
 Maintainer: David McNamara <me@mackers.com>
 Uploaders: Barak A. Pearlmutter <bap@debian.org>
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://o2sms.sourceforge.net/
 Vcs-Git: git://git.debian.org/git/collab-maint/o2sms.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/o2sms.git
